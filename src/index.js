@@ -1,14 +1,13 @@
-import { Live2DCubismFramework } from "../Framework/src/live2dcubismframework.ts"
-import Model from "./model.js"
-import Updater from "./updater.js"
+import { Live2DCubismFramework } from '../Framework/src/live2dcubismframework.ts'
+import Config from '../config.js'
+import Model from './model.js'
+import Updater from './updater.js'
 const CubismFramework = Live2DCubismFramework.CubismFramework
-
-const DIR = 'model'
 
 CubismFramework.startUp()
 CubismFramework.initialize()
 const canvas = document.getElementById('vface')
-const gl = canvas.getContext("webgl")
+const gl = canvas.getContext('webgl')
 
 function loop() {
   const now = Date.now()
@@ -17,7 +16,7 @@ function loop() {
 
   gl.flush()
   model.draw(delta)
-  setTimeout(() => requestAnimationFrame(loop), 200)
+  setTimeout(() => requestAnimationFrame(loop), Config.DELAY)
 }
 
 async function main() {

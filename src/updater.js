@@ -1,7 +1,9 @@
+import Config from '../config.js'
+
 export default class {
   constructor(model) {
     this.model = model
-    this.socket = new WebSocket('ws://localhost:5566')
+    this.socket = new WebSocket(Config.SERVER_URI)
     this.socket.onmessage = e => this.update(e.data)
   }
 

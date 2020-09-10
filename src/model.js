@@ -1,4 +1,4 @@
-import { Live2DCubismFramework } from "../Framework/src/live2dcubismframework.ts"
+import { Live2DCubismFramework } from '../Framework/src/live2dcubismframework.ts'
 import { Live2DCubismFramework as cubismusermodel } from '../Framework/src/model/cubismusermodel.ts'
 import { Live2DCubismFramework as cubismmodelsettingjson } from '../Framework/src/cubismmodelsettingjson.ts'
 import { Live2DCubismFramework as cubismeyeblink } from '../Framework/src/effect/cubismeyeblink.ts'
@@ -6,6 +6,7 @@ import { Live2DCubismFramework as cubismdefaultparameterid } from '../Framework/
 import { Live2DCubismFramework as cubismbreath } from '../Framework/src/effect/cubismbreath.ts'
 import { Live2DCubismFramework as csmvector } from '../Framework/src/type/csmvector.ts'
 import { Live2DCubismFramework as cubismmatrix44 } from '../Framework/src/math/cubismmatrix44.ts'
+import Config from '../config.js'
 const CubismFramework = Live2DCubismFramework.CubismFramework
 const CubismUserModel = cubismusermodel.CubismUserModel
 const CubismModelSettingJson = cubismmodelsettingjson.CubismModelSettingJson
@@ -15,8 +16,6 @@ const CubismBreath = cubismbreath.CubismBreath
 const csmVector = csmvector.csmVector
 const BreathParameterData = cubismbreath.BreathParameterData
 const CubismMatrix44 = cubismmatrix44.CubismMatrix44
-
-const DIR = 'model'
 
 export default class extends CubismUserModel {
   async initialize(canvas, gl) {
@@ -34,12 +33,12 @@ export default class extends CubismUserModel {
   }
 
   async initSettings() {
-    const json = await (await fetch(`${DIR}/hiyori_free_t06.model3.json`)).arrayBuffer()
-    this.settings = new CubismModelSettingJson(json, json.byteLength)
+    const settings = await (await fetch(`${Config.MODEL_DIR}/${Config.MODEL_SETTINGS}`)).arrayBuffer()
+    this.settings = new CubismModelSettingJson(settings, settings.byteLength)
   }
 
   async initModel() {
-    const model = await (await fetch(`${DIR}/${this.settings.getModelFileName()}`)).arrayBuffer()
+    const model = await (await fetch(`${Config.MODEL_DIR}/${this.settings.getModelFileName()}`)).arrayBuffer()
     this.loadModel(model)
   }
 
@@ -71,7 +70,7 @@ export default class extends CubismUserModel {
   }
 
   async initPhysics() {
-    const physics = await (await fetch(`model/${this.settings.getPhysicsFileName()}`)).arrayBuffer()
+    const physics = await (await fetch(`${Config.MODEL_DIR}/${this.settings.getPhysicsFileName()}`)).arrayBuffer()
     this.loadPhysics(physics, physics.byteLength)
   }
 
@@ -94,8 +93,6 @@ export default class extends CubismUserModel {
     let breathParameters = new csmVector()
     breathParameters.pushBack(new BreathParameterData(this._idParamBreath, 0, 0.2, 6, 0.2))
     breathParameters.pushBack(new BreathParameterData(this._idParamBodyAngleY, 0, 0.1, 6, 0.1))
-    //breathParameters.pushBack(new BreathParameterData(this._idParamBodyAngleZ, 0, 0.3, 3, 1))
-    //breathParameters.pushBack(new BreathParameterData(this._idParamAngleZ, 0, 1, 3, 1))
     this._breath.setParameters(breathParameters)
   }
 
