@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --progress",
     "build": "webpack -p",
-    "serve": "serve -l 5566"
+    "serve": "serve -l 5567"
   },
   "devDependencies": {
     "serve": "^11.3.2",
