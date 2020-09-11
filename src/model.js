@@ -65,7 +65,7 @@ export default class extends CubismUserModel {
         this.gl.generateMipmap(this.gl.TEXTURE_2D)
         this.getRenderer().bindTexture(i, tex)
       }
-      image.src = `model/${this.settings.getTextureFileName(i)}`
+      image.src = `${Config.MODEL_DIR}/${this.settings.getTextureFileName(i)}`
     }
   }
 
@@ -117,5 +117,6 @@ export default class extends CubismUserModel {
     this._physics.evaluate(this._model, delta)
     this._model.update()
     this.getRenderer().drawModel()
+    this.gl.flush()
   }
 }
