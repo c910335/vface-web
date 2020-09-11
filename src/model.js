@@ -48,7 +48,7 @@ export default class extends CubismUserModel {
     this.createRenderer()
     const renderer = this.getRenderer()
     renderer.setIsPremultipliedAlpha(true)
-    renderer.startUp(this.gl);
+    renderer.startUp(this.gl)
     renderer.setRenderState(this.gl.getParameter(this.gl.FRAMEBUFFER_BINDING), [0, 0, this.canvas.width, this.canvas.height])
   }
 
@@ -60,7 +60,7 @@ export default class extends CubismUserModel {
         this.gl.bindTexture(this.gl.TEXTURE_2D, tex)
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR_MIPMAP_LINEAR)
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR)
-        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
+        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1)
         this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image)
         this.gl.generateMipmap(this.gl.TEXTURE_2D)
         this.getRenderer().bindTexture(i, tex)
@@ -97,10 +97,10 @@ export default class extends CubismUserModel {
   }
 
   initMatrix() {
-    let matrix = new CubismMatrix44();
-    matrix.scale(5.5, 5.5);
-    matrix.translateRelative(0, -0.43);
-    this.getRenderer().setMvpMatrix(matrix);
+    let matrix = new CubismMatrix44()
+    matrix.scale(5.5, 5.5)
+    matrix.translateRelative(0, -0.43)
+    this.getRenderer().setMvpMatrix(matrix)
   }
 
   initGL() {
