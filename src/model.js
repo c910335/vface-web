@@ -98,8 +98,8 @@ export default class extends CubismUserModel {
 
   initMatrix() {
     let matrix = new CubismMatrix44()
-    matrix.scale(5.5, 5.5)
-    matrix.translateRelative(0, -0.43)
+    matrix.scale(Config.MODEL_SCALE, Config.MODEL_SCALE)
+    matrix.translateRelative(Config.MODEL_OFFSET_X, Config.MODEL_OFFSET_Y)
     this.getRenderer().setMvpMatrix(matrix)
   }
 
